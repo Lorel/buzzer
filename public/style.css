@@ -13,8 +13,8 @@ body {
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   /* background: linear-gradient(-45deg, #a6f4e5 0%, #23e6bf 47%); */
   /* background-color: rgb(44, 75, 255); */
-  background-color: #fff;
-  color: #1A2634;
+  background-color: #000;
+  color: rgb(169, 178, 189);
   text-align: center;
 }
 
@@ -40,14 +40,10 @@ li {
   display: none;
 }
 
-header {
-  background-color: #fff;
-}
-
 .logo {
   width: 100%;
   max-width: 310px;
-  max-height: 120px;
+  max-height: 250px;
   padding: 1em 0;
 }
 
@@ -59,11 +55,6 @@ header {
 }
 .view button:last-child {
   margin-bottom: 0;
-}
-
-.buzzer-mode {
-  background-color: rgb(16, 21, 78);
-  color: rgb(243, 175, 185);
 }
 
 input[type="text"],
@@ -121,21 +112,31 @@ button:focus {
 }
 
 .main-image {
+  margin-top: 66px;
   width: 90%;
 }
 
 .buzzer {
   height: 10em;
   font-size: 2em;
-  background-color: rgb(243, 175, 185);
-  color: rgb(18, 30, 102);
+  background-color: transparent;
+  background-image: url("/burger-normal.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  outline: none;
 }
+.buzzer:hover {
+  background-color: transparent;
+}
+.buzzer:active,
 .buzzer:focus {
-  box-shadow: 0 0 0 3px #ABB7FF;
+  box-shadow: none;
+  background-image: url("/burger-smashed.png");
 }
-.buzzer:hover,
-.buzzer:active {
-  background-color: #e97284;
+
+.buzzer img {
+  width: 100%;
 }
 
 .secondary {

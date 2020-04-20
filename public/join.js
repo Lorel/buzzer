@@ -42,6 +42,7 @@ form.addEventListener('submit', (e) => {
 
 buzzer.addEventListener('click', (e) => {
   socket.emit('buzz', user)
+  setTimeout(() => buzzer.blur(), 400)
 })
 
 editInfo.addEventListener('click', () => {
@@ -52,7 +53,8 @@ editInfo.addEventListener('click', () => {
 
 document.addEventListener('keydown', function(e) {
   if (e.which == 32 && user.name) {
-    socket.emit('buzz', user)
+    buzzer.click()
+    buzzer.focus()
   }
 })
 
