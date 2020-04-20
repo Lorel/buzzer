@@ -93,6 +93,11 @@ input[type="number"]:active {
   outline: none;
 }
 
+.teams {
+  display: flex;
+  justify-content: space-around;
+}
+
 button {
   padding: 1.4em 1.4em;
   font-size: 1.2em;

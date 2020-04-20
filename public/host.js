@@ -21,3 +21,8 @@ clear.addEventListener('click', () => {
   socket.emit('clear')
 })
 
+document.addEventListener('keydown', function(e) {
+  if (e.which == 32) {
+    socket.emit('clear')
+  }
+})

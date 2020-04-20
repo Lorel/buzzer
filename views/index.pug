@@ -5,6 +5,7 @@ html
     meta(name='viewport' content='width=device-width, initial-scale=1')
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:500,700|Roboto:400,500,700,900")
     link(rel="stylesheet" href='/style.css')
+
   body.js-body
     header
       img.logo(src='/buzzer-logo.svg')
@@ -13,14 +14,30 @@ html
       form.view.js-join
         img(src="/lets-play.png" class="main-image")
         h2="Let's play!"
+
         input(type='text' name='name' placeholder='Your name' required='required')
-        input(type='number' name='team' placeholder='Your team number' required='required')
+
+        .teams
+          .radio-container
+            input(type='radio' name='team' required='required' value='mayo')
+            label(for='mayo')
+              | MAYO
+
+          .radio-container
+            input(type='radio' name='team' required='required' value='ketchup')
+            label(for='ketchup')
+              | KETCHUP
+
         button(type='submit')='Join!'
 
       div.view.js-joined.hidden
-        button.js-buzzer.buzzer()='Buzz!!!'
+        button.js-buzzer.buzzer='Buzz!!!'
         p.js-joined-info=""
         button.js-edit.secondary='Change teams'
+
+        ol.js-buzzes
+          each buzz in buzzes
+            li=`${buzz.name} on Team ${buzz.team}`
 
     script(src='/socket.io/socket.io.js')
     script(src='/join.js')
