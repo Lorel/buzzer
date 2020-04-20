@@ -44,9 +44,19 @@ io.on('connection', (socket) => {
   })
 
   socket.on('buzz', (user) => {
+    const noBuzz = data.buzzes.size == 0
+
     data.buzzes.add(`${user.name}-${user.team}`)
     io.emit('buzzes', [...data.buzzes])
     console.log(`${user.name} buzzed in!`)
+
+    if (noBuzz) {
+      setTimeout(() => {
+        data.buzzes = new Set()
+        io.emit('buzzes', [...data.buzzes])
+        console.log(`Clear buzzes`)
+      }, 5000)
+    }
   })
 
   socket.on('clear', () => {
@@ -56,4 +66,4 @@ io.on('connection', (socket) => {
   })
 })
 
-server.listen(process.env.PORT || 8090, () => console.log('Listening on 8090'))
+server.listen(process.env.PORT || 8090, () => console.log('Listening on http://localhost:8090/'))
