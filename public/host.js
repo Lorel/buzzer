@@ -1,3 +1,18 @@
+class Sound {
+  constructor(src) {
+    this.sound = document.createElement('audio');
+    this.sound.src = src;
+    this.sound.setAttribute('preload', 'auto');
+    this.sound.setAttribute('controls', 'none');
+    this.sound.style.display = 'none';
+    document.body.appendChild(this.sound);
+  }
+
+  play = () => this.sound.play()
+}
+
+const mayoBuzz = new Sound('mayo.ogg')
+const ketchupBuzz = new Sound('ketchup.ogg')
 const socket = io()
 const active = document.querySelector('.js-active')
 const buzzList = document.querySelector('.js-buzzes')
@@ -15,6 +30,17 @@ socket.on('buzzes', (buzzes) => {
     })
     .map(user => `<li>${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}</li>`)
     .join('')
+
+  if (buzzes.length == 1) {
+    switch (buzzes[0].split('-')[1]) {
+      case 'mayo':
+        mayoBuzz.play()
+        break
+      case 'ketchup':
+        ketchupBuzz.play()
+        break
+    }
+  }
 })
 
 clear.addEventListener('click', () => {

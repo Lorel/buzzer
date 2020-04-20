@@ -1,3 +1,16 @@
+class Sound {
+  constructor(src) {
+    this.sound = document.createElement('audio');
+    this.sound.src = src;
+    this.sound.setAttribute('preload', 'auto');
+    this.sound.setAttribute('controls', 'none');
+    this.sound.style.display = 'none';
+    document.body.appendChild(this.sound);
+  }
+
+  play = () => this.sound.play()
+}
+
 const socket = io()
 const body = document.querySelector('.js-body')
 const form = document.querySelector('.js-join')
@@ -8,6 +21,7 @@ const editInfo = document.querySelector('.js-edit')
 const buzzList = document.querySelector('.js-buzzes')
 
 let user = {}
+let sound
 
 const getUserInfo = () => {
   user = JSON.parse(localStorage.getItem('user')) || {}
@@ -38,10 +52,12 @@ form.addEventListener('submit', (e) => {
   form.classList.add('hidden')
   joined.classList.remove('hidden')
   body.classList.add('buzzer-mode')
+  sound = new Sound(user.team + '.ogg')
 })
 
 buzzer.addEventListener('click', (e) => {
   socket.emit('buzz', user)
+  sound.play()
   setTimeout(() => buzzer.blur(), 400)
 })
 
