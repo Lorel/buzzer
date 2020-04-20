@@ -79,7 +79,7 @@ socket.on('buzzes', (buzzes) => {
       const p = buzz.split('-')
       return { name: p[0], team: p[1] }
     })
-    .map(user => `<li>${user.name} on Team ${user.team}</li>`)
+    .map(user => `<li>${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}</li>`)
     .join('')
 
   if (buzzes.length == 1) {
