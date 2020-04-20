@@ -70,7 +70,6 @@ li {
 
 .radio-container label {
   align-items: center;
-  /* background-color: rgb(238, 228, 228); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50% 80%;
@@ -82,7 +81,7 @@ li {
   cursor: pointer;
   display: flex;
   flex: 1;
-  height: 150px;
+  height: 170px;
   justify-content: center;
 }
 .radio-container.mayo label {

@@ -11,6 +11,8 @@ class Sound {
   play = () => this.sound.play()
 }
 
+const mayoBuzz = new Sound('mayo.ogg')
+const ketchupBuzz = new Sound('ketchup.ogg')
 const socket = io()
 const body = document.querySelector('.js-body')
 const form = document.querySelector('.js-join')
@@ -21,7 +23,6 @@ const editInfo = document.querySelector('.js-edit')
 const buzzList = document.querySelector('.js-buzzes')
 
 let user = {}
-let sound
 
 const getUserInfo = () => {
   user = JSON.parse(localStorage.getItem('user')) || {}
@@ -52,12 +53,10 @@ form.addEventListener('submit', (e) => {
   form.classList.add('hidden')
   joined.classList.remove('hidden')
   body.classList.add('buzzer-mode')
-  sound = new Sound(user.team + '.ogg')
 })
 
 buzzer.addEventListener('click', (e) => {
   socket.emit('buzz', user)
-  sound.play()
   setTimeout(() => buzzer.blur(), 400)
 })
 
@@ -82,6 +81,17 @@ socket.on('buzzes', (buzzes) => {
     })
     .map(user => `<li>${user.name} on Team ${user.team}</li>`)
     .join('')
+
+  if (buzzes.length == 1) {
+    switch (buzzes[0].split('-')[1]) {
+      case 'mayo':
+        mayoBuzz.play()
+        break
+      case 'ketchup':
+        ketchupBuzz.play()
+        break
+    }
+  }
 })
 
 getUserInfo()
