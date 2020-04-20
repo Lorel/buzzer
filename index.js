@@ -1,5 +1,6 @@
 const http = require('http')
 const express = require('express')
+const basicAuth = require('express-basic-auth')
 const socketio = require('socket.io')
 
 const app = express();
@@ -25,6 +26,14 @@ app.use(express.static('public'))
 app.set('view engine', 'pug')
 
 app.get('/', (req, res) => res.render('index', Object.assign({ title }, getData())))
+
+// basic authentication
+if (process.env.BASIC_AUTH_USER && process.env.BASIC_AUTH_PWD) {
+  const users = {}
+  users[process.env.BASIC_AUTH_USER] = process.env.BASIC_AUTH_PWD
+  app.use(basicAuth({ users, challenge: true }))
+}
+
 app.get('/host', (req, res) => res.render('host', Object.assign({ title }, getData())))
 
 io.on('connection', (socket) => {
