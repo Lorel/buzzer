@@ -57,6 +57,52 @@ li {
   margin-bottom: 0;
 }
 
+.radio-container {
+  display: flex;
+  flex: 1;
+}
+.radio-container {
+  flex: 1;
+}
+.radio-container {
+  flex: 1;
+}
+
+.radio-container label {
+  align-items: center;
+  background-color: rgb(238, 228, 228);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50% 80%;
+  border-color: transparent;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 5px;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  height: 150px;
+  justify-content: center;
+}
+.radio-container.mayo label {
+  background-image: url("/mayo.png");
+  margin-right: 5px;
+}
+.radio-container.ketchup label {
+  background-image: url("/ketchup.png");
+  margin-left: 5px;
+}
+.radio-container.mayo input:checked + label {
+  border-color: yellow;
+}
+.radio-container.ketchup input:checked + label {
+  border-color: red;
+}
+.radio-container input {
+  display: none;
+}
+
 input[type="text"],
 input[type="number"],
 button {
@@ -73,6 +119,7 @@ button {
 input[type="text"],
 input[type="number"] {
   border: 1px solid #B8B8B8;
+  text-align: center;
 }
 
 input[type="text"]:focus,

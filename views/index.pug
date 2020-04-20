@@ -2,43 +2,43 @@ doctype html
 html
   head
     title=title
-    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:500,700|Roboto:400,500,700,900")
-    link(rel="stylesheet" href='/style.css')
+    link(rel="stylesheet" href="/style.css")
+    link(rel="prefetch" href="/burger-normal.png")
+    link(rel="prefetch" href="/burger-smashed.png")
 
   body.js-body
     header
-      img.logo(src='/burger-cuite-logo.png')
+      img.logo(src="/burger-cuite-logo.png")
 
     div.container
       form.view.js-join
         img(src="/burger-normal.png" class="main-image")
-        h2="Let's play!"
+        h2="Let’s cheesebuzz!"
 
-        input(type='text' name='name' placeholder='Your name' required='required')
+        input(type="text" name="name" placeholder="Your name" required="required")
 
         .teams
-          .radio-container
-            input(type='radio' name='team' required='required' value='mayo')
-            label(for='mayo')
-              | MAYO
+          .radio-container.mayo
+            input(type="radio" name="team" required="required" value="mayo" id="mayo")
+            label(for="mayo")
 
-          .radio-container
-            input(type='radio' name='team' required='required' value='ketchup')
-            label(for='ketchup')
-              | KETCHUP
+          .radio-container.ketchup
+            input(type="radio" name="team" required="required" value="ketchup" id="ketchup")
+            label(for="ketchup")
 
-        button(type='submit')='Join!'
+        button(type="submit")="Order!"
 
       div.view.js-joined.hidden
         button.js-buzzer.buzzer
 
         p.js-joined-info=""
-        button.js-edit.secondary='Change teams'
+        button.js-edit.secondary="Change order"
 
         ol.js-buzzes
           each buzz in buzzes
             li=`${buzz.name} on Team ${buzz.team}`
 
-    script(src='/socket.io/socket.io.js')
-    script(src='/join.js')
+    script(src="/socket.io/socket.io.js")
+    script(src="/join.js")

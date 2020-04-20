@@ -34,7 +34,7 @@ form.addEventListener('submit', (e) => {
 
   socket.emit('join', user)
   saveUserInfo()
-  joinedInfo.innerText = `${user.name} on Team ${user.team}`
+  joinedInfo.innerText = `${user.name} on Team ${user.team.toUpperCase()}`
   form.classList.add('hidden')
   joined.classList.remove('hidden')
   body.classList.add('buzzer-mode')
