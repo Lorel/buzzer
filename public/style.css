@@ -94,10 +94,10 @@ li {
   margin-left: 5px;
 }
 .radio-container.mayo input:checked + label {
-  border-color: yellow;
+  border-color: #EDD402;
 }
 .radio-container.ketchup input:checked + label {
-  border-color: red;
+  border-color: #CC0100;
 }
 .radio-container input {
   display: none;
