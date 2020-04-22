@@ -1,6 +1,5 @@
 const http = require('http')
 const express = require('express')
-const basicAuth = require('express-basic-auth')
 const socketio = require('socket.io')
 
 const app = express();
@@ -25,15 +24,34 @@ const getData = () => ({
 app.use(express.static('public'))
 app.set('view engine', 'pug')
 
+// authentication middleware
+app.use((req, res, next) => {
+  const secureUrls = [
+    '/host',
+  ]
+
+  if (process.env.BASIC_AUTH_USER && process.env.BASIC_AUTH_PWD && secureUrls.indexOf(req.url) > -1) {
+    const auth = {login: process.env.BASIC_AUTH_USER, password: process.env.BASIC_AUTH_PWD}
+
+    // parse login and password from headers
+    const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+    const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
+
+    // Verify login and password are set and correct
+    if (login && password && login === auth.login && password === auth.password) {
+      // Access granted...
+      return next()
+    } else {
+      // Access denied...
+      res.set('WWW-Authenticate', 'Basic realm="401"')
+      res.status(401).send('Authentication required.')
+    }
+  } else {
+    return next()
+  }
+})
+
 app.get('/', (req, res) => res.render('index', Object.assign({ title }, getData())))
-
-// basic authentication
-if (process.env.BASIC_AUTH_USER && process.env.BASIC_AUTH_PWD) {
-  const users = {}
-  users[process.env.BASIC_AUTH_USER] = process.env.BASIC_AUTH_PWD
-  app.use(basicAuth({ users, challenge: true }))
-}
-
 app.get('/host', (req, res) => res.render('host', Object.assign({ title }, getData())))
 
 io.on('connection', (socket) => {
