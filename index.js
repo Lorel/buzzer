@@ -54,34 +54,34 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => res.render('index', Object.assign({ title }, getData())))
 app.get('/host', (req, res) => res.render('host', Object.assign({ title }, getData())))
 
+const join = (user) => {
+  data.users.add(user.id)
+  io.emit('active', [...data.users].length)
+  console.log(`${user.name} joined!`)
+}
+
+const buzz = (user) => {
+  data.buzzes.add(`${user.name}-${user.team}`)
+  io.emit('buzzes', [...data.buzzes])
+  console.log(`${user.name} buzzed in!`)
+
+  if (!data.clearTimeout) {
+    data.clearTimeout = setTimeout(clear, parseInt(process.env.CLEAR_BUZZES_TIMEOUT) || 5000)
+  }
+}
+
+const clear = () => {
+  data.buzzes = new Set()
+  io.emit('buzzes', [...data.buzzes])
+  clearTimeout(data.clearTimeout)
+  delete(data.clearTimeout)
+  console.log(`Clear buzzes`)
+}
+
 io.on('connection', (socket) => {
-  socket.on('join', (user) => {
-    data.users.add(user.id)
-    io.emit('active', [...data.users].length)
-    console.log(`${user.name} joined!`)
-  })
-
-  socket.on('buzz', (user) => {
-    const noBuzz = data.buzzes.size == 0
-
-    data.buzzes.add(`${user.name}-${user.team}`)
-    io.emit('buzzes', [...data.buzzes])
-    console.log(`${user.name} buzzed in!`)
-
-    if (noBuzz) {
-      setTimeout(() => {
-        data.buzzes = new Set()
-        io.emit('buzzes', [...data.buzzes])
-        console.log(`Clear buzzes`)
-      }, 5000)
-    }
-  })
-
-  socket.on('clear', () => {
-    data.buzzes = new Set()
-    io.emit('buzzes', [...data.buzzes])
-    console.log(`Clear buzzes`)
-  })
+  socket.on('join', join)
+  socket.on('buzz', buzz)
+  socket.on('clear', clear)
 })
 
 server.listen(process.env.PORT || 8090, () => console.log('Listening on http://localhost:8090/'))

@@ -23,6 +23,8 @@ socket.on('active', (numberActive) => {
 })
 
 socket.on('buzzes', (buzzes) => {
+  const noBuzz = buzzList.innerHTML.length == 0
+
   buzzList.innerHTML = buzzes
     .map(buzz => {
       const p = buzz.split('-')
@@ -31,7 +33,7 @@ socket.on('buzzes', (buzzes) => {
     .map(user => `<li>${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}</li>`)
     .join('')
 
-  if (buzzes.length == 1) {
+  if (noBuzz && buzzes.length == 1) {
     switch (buzzes[0].split('-')[1]) {
       case 'mayo':
         mayoBuzz.play()
