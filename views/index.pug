@@ -43,11 +43,12 @@ html
         button.js-buzzer.buzzer
 
         p.js-joined-info=''
-        button.js-edit.secondary='Change order'
 
         ol.js-buzzes
           each buzz in buzzes
             li=`${buzz.name} on Team ${buzz.team}`
+
+        button.js-edit.secondary='Change order'
 
     script(src='/socket.io/socket.io.js')
     script(src='/join.js')

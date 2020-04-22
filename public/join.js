@@ -8,7 +8,9 @@ class Sound {
     document.body.appendChild(this.sound);
   }
 
-  play = () => this.sound.play()
+  play() {
+    this.sound.play()
+  }
 }
 
 const mayoBuzz = new Sound('mayo.ogg')
@@ -53,9 +55,12 @@ form.addEventListener('submit', (e) => {
   form.classList.add('hidden')
   joined.classList.remove('hidden')
   body.classList.add('buzzer-mode')
+
+  return false
 })
 
 buzzer.addEventListener('click', (e) => {
+  buzzer.focus()
   socket.emit('buzz', user)
   setTimeout(() => buzzer.blur(), 400)
 })
