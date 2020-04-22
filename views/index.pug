@@ -2,43 +2,52 @@ doctype html
 html
   head
     title=title
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:500,700|Roboto:400,500,700,900")
-    link(rel="stylesheet" href="/style.css")
-    link(rel="prefetch" href="/burger-normal.png")
-    link(rel="prefetch" href="/burger-smashed.png")
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='apple-touch-icon' sizes='180x180' href='/favicons/apple-touch-icon.png')
+    link(rel='icon' type='image/png' sizes='32x32' href='/favicons/favicon-32x32.png')
+    link(rel='icon' type='image/png' sizes='16x16' href='/favicons/favicon-16x16.png')
+    link(rel='manifest' href='/favicons/site.webmanifest')
+    link(rel='mask-icon' href='/favicons/safari-pinned-tab.svg' color='#5bbad5')
+    link(rel='shortcut icon' href='/favicons/favicon.ico')
+    meta(name='msapplication-TileColor' content='#da532c')
+    meta(name='msapplication-config' content='/favicons/browserconfig.xml')
+    meta(name='theme-color' content='#ffffff')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:500,700|Roboto:400,500,700,900')
+    link(rel='stylesheet' href='/style.css')
+    link(rel='prefetch' href='/burger-normal.png')
+    link(rel='prefetch' href='/burger-smashed.png')
 
   body.js-body
     header
-      img.logo(src="/burger-cuite-logo.png")
+      img.logo(src='/burger-cuite-logo.png')
 
     div.container
       form.view.js-join
-        img(src="/burger-normal.png" class="main-image")
-        h2="Let’s cheesebuzz!"
+        img(src='/burger-normal.png' class='main-image')
+        h2='Let’s cheesebuzz!'
 
-        input(type="text" name="name" placeholder="Your name" required="required")
+        input(type='text' name='name' placeholder='Your name' required='required')
 
         .teams
           .radio-container.mayo
-            input(type="radio" name="team" required="required" value="mayo" id="mayo")
-            label(for="mayo")
+            input(type='radio' name='team' required='required' value='mayo' id='mayo')
+            label(for='mayo')
 
           .radio-container.ketchup
-            input(type="radio" name="team" required="required" value="ketchup" id="ketchup")
-            label(for="ketchup")
+            input(type='radio' name='team' required='required' value='ketchup' id='ketchup')
+            label(for='ketchup')
 
-        button(type="submit")="Order!"
+        button(type='submit')='Order!'
 
       div.view.js-joined.hidden
         button.js-buzzer.buzzer
 
-        p.js-joined-info=""
-        button.js-edit.secondary="Change order"
+        p.js-joined-info=''
+        button.js-edit.secondary='Change order'
 
         ol.js-buzzes
           each buzz in buzzes
             li=`${buzz.name} on Team ${buzz.team}`
 
-    script(src="/socket.io/socket.io.js")
-    script(src="/join.js")
+    script(src='/socket.io/socket.io.js')
+    script(src='/join.js')
