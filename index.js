@@ -65,8 +65,8 @@ const buzz = (user) => {
   io.emit('buzzes', [...data.buzzes])
   console.log(`${user.name} buzzed in!`)
 
-  if (!data.clearTimeout) {
-    data.clearTimeout = setTimeout(clear, parseInt(process.env.CLEAR_BUZZES_TIMEOUT) || 5000)
+  if (!data.clearTimeout && process.env.CLEAR_BUZZES_TIMEOUT) {
+    data.clearTimeout = setTimeout(clear, parseInt(process.env.CLEAR_BUZZES_TIMEOUT))
   }
 }
 
