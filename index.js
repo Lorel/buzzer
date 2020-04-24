@@ -13,8 +13,8 @@ let data = {
   users: new Set(),
   buzzes: new Set(),
   scores: {
-    mayo: 0,
     ketchup: 0,
+    mayo: 0,
   },
 }
 

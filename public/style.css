@@ -95,19 +95,19 @@ li {
   height: 170px;
   justify-content: center;
 }
-.radio-container.mayo label {
-  background-image: url("/mayo.png");
-  margin-right: 5px;
-}
 .radio-container.ketchup label {
   background-image: url("/ketchup.png");
   margin-left: 5px;
 }
-.radio-container.mayo input:checked + label {
-  border-color: #EDD402;
+.radio-container.mayo label {
+  background-image: url("/mayo.png");
+  margin-right: 5px;
 }
 .radio-container.ketchup input:checked + label {
   border-color: #CC0100;
+}
+.radio-container.mayo input:checked + label {
+  border-color: #EDD402;
 }
 .radio-container input {
   display: none;

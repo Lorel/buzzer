@@ -1,3 +1,5 @@
+window.socket = io()
+
 class Sound {
   constructor(src) {
     this.sound = document.createElement('audio');
@@ -13,19 +15,18 @@ class Sound {
   }
 }
 
-const mayoBuzz = new Sound('mayo.ogg')
 const ketchupBuzz = new Sound('ketchup.ogg')
+const mayoBuzz = new Sound('mayo.ogg')
 
 const play = (sound) => {
   switch (sound) {
-    case 'mayo':
-      mayoBuzz.play()
-      break
     case 'ketchup':
       ketchupBuzz.play()
+      break
+    case 'mayo':
+      mayoBuzz.play()
       break
   }
 }
 
-window.socket = io()
-const teams = ['mayo', 'ketchup']
+const teams = ['ketchup', 'mayo']

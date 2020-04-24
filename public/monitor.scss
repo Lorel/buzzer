@@ -1,6 +1,6 @@
 @for $score from 0 through 25 {
-  svg[class="mayo-#{$score}"] {
-    g[id="ketchup-tv"] {
+  svg[class="ketchup-#{$score}"] {
+    g[id="mayo-tv"] {
       display: none;
     }
 
@@ -18,11 +18,10 @@
     }
   }
 
-  svg[class="ketchup-#{$score}"] {
-    g[id="mayo-tv"] {
+  svg[class="mayo-#{$score}"] {
+    g[id="ketchup-tv"] {
       display: none;
     }
-
 
     @for $i from 1 through 25 {
 
