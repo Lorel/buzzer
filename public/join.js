@@ -76,12 +76,4 @@ socket.on('buzzes', (buzzes) => {
   }
 })
 
-socket.on('scores', (scores) => {
-  teams.forEach((team) => {
-    const score = scoresContainer.querySelector(`.${team} .score`)
-
-    score.innerText = scores[team]
-  })
-})
-
 getUserInfo()

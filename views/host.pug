@@ -19,27 +19,32 @@ html
     header
       img.logo(src='/burger-cuite-logo.png')
 
-    div.container
-      h2.js-active=`${users.length} joined`
+    .row
+      object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv large')
 
-      .row.scores
-        each score, team in scores
-          .col(class=team)
-            h2=team.toUpperCase()
+      div.container
+        .row
+          object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv small')
+          object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv small')
 
-            .row
+        h2.js-active=`${users.length} joined`
+
+        .row.scores
+          each score, team in scores
+            .row(class=team)
               button.js-score-minus='-'
-              span.score=score
               button.js-score-plus='+'
 
-      .row
-        button.js-reset='Clear scores'
+        .row
+          button.js-reset='Clear scores'
 
-      ol.js-buzzes
-        each buzz in buzzes
-          li=`${buzz.name} on Team ${buzz.team}`
+        ol.js-buzzes
+          each buzz in buzzes
+            li=`${buzz.name} on Team ${buzz.team}`
 
-      button.js-clear='Clear buzzes'
+        button.js-clear='Clear buzzes'
+
+      object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv large')
 
     script(src='/socket.io/socket.io.js')
     script(src='/common.js')

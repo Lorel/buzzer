@@ -21,45 +21,44 @@ html
     header
       img.logo(src='/burger-cuite-logo.png')
 
-    div.container
-      object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='main-image')
-      object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='main-image')
-      form.view.js-join
-        img(src='/burger-normal.png' class='main-image')
-        h2='Let’s cheesebuzz!'
+    .row
+      object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv large')
 
-        input(type='text' name='name' placeholder='Your name' required='required')
+      div.container
+        .row
+          object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv small')
+          object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv small')
 
-        .teams
-          .radio-container.ketchup
-            input(type='radio' name='team' required='required' value='ketchup' id='ketchup')
-            label(for='ketchup')
+        form.view.js-join
+          img(src='/burger-normal.png' class='main-image')
+          h2='Let’s cheesebuzz!'
 
-          .radio-container.mayo
-            input(type='radio' name='team' required='required' value='mayo' id='mayo')
-            label(for='mayo')
+          input(type='text' name='name' placeholder='Your name' required='required')
+
+          .teams
+            .radio-container.ketchup
+              input(type='radio' name='team' required='required' value='ketchup' id='ketchup')
+              label(for='ketchup')
+
+            .radio-container.mayo
+              input(type='radio' name='team' required='required' value='mayo' id='mayo')
+              label(for='mayo')
 
 
-        button(type='submit')='Order!'
+          button(type='submit')='Order!'
 
-      div.view.js-joined.hidden
-        button.js-buzzer.buzzer
+        div.view.js-joined.hidden
+          button.js-buzzer.buzzer
 
-        p.js-joined-info=''
+          p.js-joined-info=''
 
-        .row.scores
-          each score, team in scores
-            .col(class=team)
-              h2=team.toUpperCase()
+          ol.js-buzzes
+            each buzz in buzzes
+              li=`${buzz.name} on Team ${buzz.team}`
 
-              .row
-                span.score=score
+          button.js-edit.secondary='Change order'
 
-        ol.js-buzzes
-          each buzz in buzzes
-            li=`${buzz.name} on Team ${buzz.team}`
-
-        button.js-edit.secondary='Change order'
+      object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv large')
 
     script(src='/socket.io/socket.io.js')
     script(src='/common.js')

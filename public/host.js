@@ -46,14 +46,6 @@ teams.forEach((team) => {
   })
 })
 
-socket.on('scores', (scores) => {
-  teams.forEach((team) => {
-    const score = scoresContainer.querySelector(`.${team} .score`)
-
-    score.innerText = scores[team]
-  })
-})
-
 reset.addEventListener('click', () => {
   socket.emit('reset')
 })
