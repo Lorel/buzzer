@@ -27,5 +27,5 @@ const play = (sound) => {
   }
 }
 
-const socket = io()
+window.socket = io()
 const teams = ['mayo', 'ketchup']

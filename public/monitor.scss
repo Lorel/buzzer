@@ -1,0 +1,40 @@
+@for $score from 0 through 25 {
+  svg[class="mayo-#{$score}"] {
+    g[id="ketchup-tv"] {
+      display: none;
+    }
+
+    @for $i from 1 through 25 {
+
+      @if $i < $score {
+        g[id="#{$i}-Ghost"] {
+          display: none;
+        }
+      } @else {
+        g[id="#{$i}-Full"] {
+          display: none;
+        }
+      }
+    }
+  }
+
+  svg[class="ketchup-#{$score}"] {
+    g[id="mayo-tv"] {
+      display: none;
+    }
+
+
+    @for $i from 1 through 25 {
+
+      @if $i < $score {
+        g[id="#{$i}-Ghost"] {
+          display: none;
+        }
+      } @else {
+        g[id="#{$i}-Full"] {
+          display: none;
+        }
+      }
+    }
+  }
+}

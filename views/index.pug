@@ -22,6 +22,8 @@ html
       img.logo(src='/burger-cuite-logo.png')
 
     div.container
+      object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='main-image')
+      object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='main-image')
       form.view.js-join
         img(src='/burger-normal.png' class='main-image')
         h2='Let’s cheesebuzz!'
