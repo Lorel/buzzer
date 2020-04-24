@@ -30,7 +30,7 @@ html
         h2.js-active=`${users.length} joined`
 
         .row.scores
-          each score, team in scores
+          each team in ['ketchup', 'mayo']
             .row(class=team)
               button.js-score-minus='-'
               button.js-score-plus='+'

@@ -25,7 +25,7 @@
 
     @for $i from 1 through 25 {
 
-      @if $i < $score {
+      @if $i <= $score {
         g[id="#{$i}-Ghost"] {
           display: none;
         }
