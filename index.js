@@ -1,5 +1,6 @@
 const http = require('http')
 const express = require('express')
+const sassMiddleware = require('node-sass-middleware')
 const socketio = require('socket.io')
 
 const app = express();
@@ -25,6 +26,14 @@ const getData = () => ({
   }),
   scores: data.scores
 })
+
+app.use(sassMiddleware({
+  /* Options */
+  src: 'public', // __dirname,
+  dest: 'public', // path.join(__dirname, 'public'),
+  debug: true,
+  // outputStyle: 'compressed',
+}));
 
 app.use(express.static('public'))
 app.set('view engine', 'pug')
