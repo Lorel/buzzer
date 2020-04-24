@@ -1,21 +1,3 @@
-class Sound {
-  constructor(src) {
-    this.sound = document.createElement('audio');
-    this.sound.src = src;
-    this.sound.setAttribute('preload', 'auto');
-    this.sound.setAttribute('controls', 'none');
-    this.sound.style.display = 'none';
-    document.body.appendChild(this.sound);
-  }
-
-  play() {
-    this.sound.play()
-  }
-}
-
-const mayoBuzz = new Sound('mayo.ogg')
-const ketchupBuzz = new Sound('ketchup.ogg')
-const socket = io()
 const body = document.querySelector('.js-body')
 const form = document.querySelector('.js-join')
 const joined = document.querySelector('.js-joined')
@@ -23,6 +5,7 @@ const buzzer = document.querySelector('.js-buzzer')
 const joinedInfo = document.querySelector('.js-joined-info')
 const editInfo = document.querySelector('.js-edit')
 const buzzList = document.querySelector('.js-buzzes')
+const scoresContainer = document.querySelector('.scores')
 
 let user = {}
 
@@ -99,6 +82,14 @@ socket.on('buzzes', (buzzes) => {
         break
     }
   }
+})
+
+socket.on('scores', (scores) => {
+  teams.forEach((team) => {
+    const score = scoresContainer.querySelector(`.${team} .score`)
+
+    score.innerText = scores[team]
+  })
 })
 
 getUserInfo()

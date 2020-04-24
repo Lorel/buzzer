@@ -11,6 +11,10 @@ const title = 'Buffer Buzzer'
 let data = {
   users: new Set(),
   buzzes: new Set(),
+  scores: {
+    mayo: 0,
+    ketchup: 0,
+  },
 }
 
 const getData = () => ({
@@ -18,7 +22,8 @@ const getData = () => ({
   buzzes: [...data.buzzes].map(b => {
     const [ name, team ] = b.split('-')
     return { name, team }
-  })
+  }),
+  scores: data.scores
 })
 
 app.use(express.static('public'))
@@ -78,10 +83,35 @@ const clear = () => {
   console.log(`Clear buzzes`)
 }
 
+const increase = (team) => {
+  data.scores[team] = data.scores[team] + 1
+  io.emit('scores', data.scores)
+  console.log(`${team} score increased!`, data.scores)
+}
+
+const decrease = (team) => {
+  data.scores[team] = data.scores[team] - 1
+  io.emit('scores', data.scores)
+  console.log(`${team} score decreased!`, data.scores)
+}
+
+const reset = () => {
+  data.scores = {
+    mayo: 0,
+    ketchup: 0,
+  }
+  io.emit('scores', data.scores)
+  console.log(`Scores reset!`, data.scores)
+}
+
 io.on('connection', (socket) => {
   socket.on('join', join)
   socket.on('buzz', buzz)
   socket.on('clear', clear)
+  socket.on('increase', increase)
+  socket.on('decrease', decrease)
+  socket.on('reset', reset)
 })
+
 
 server.listen(process.env.PORT || 8090, () => console.log('Listening on http://localhost:8090/'))

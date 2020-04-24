@@ -44,6 +44,14 @@ html
 
         p.js-joined-info=''
 
+        .row.scores
+          each score, team in scores
+            .col(class=team)
+              h2=team.toUpperCase()
+
+              .row
+                span.score=score
+
         ol.js-buzzes
           each buzz in buzzes
             li=`${buzz.name} on Team ${buzz.team}`
@@ -51,4 +59,5 @@ html
         button.js-edit.secondary='Change order'
 
     script(src='/socket.io/socket.io.js')
+    script(src='/common.js')
     script(src='/join.js')

@@ -53,8 +53,19 @@ li {
   padding: 1em;
   margin: 0 auto;
 }
-.view button:last-child {
-  margin-bottom: 0;
+
+.row {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.col {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .radio-container {
@@ -136,9 +147,9 @@ input[type="number"]:active {
 }
 
 button {
-  padding: 1.4em 1.4em;
+  padding: .7em 1.4em;
   font-size: 1.2em;
-  background-color: #161D99;
+  background-color: #3748E1;
   color: #fff;
   cursor: pointer;
   border: 0;
@@ -192,4 +203,11 @@ button:focus {
 
 .secondary:hover {
   background-color: rgb(44, 75, 255);
+}
+
+.scores button {
+  height: 2.5rem;
+  line-height: 0;
+  padding: 0;
+  width: 2.5rem;
 }

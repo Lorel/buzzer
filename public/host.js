@@ -1,22 +1,8 @@
-class Sound {
-  constructor(src) {
-    this.sound = document.createElement('audio');
-    this.sound.src = src;
-    this.sound.setAttribute('preload', 'auto');
-    this.sound.setAttribute('controls', 'none');
-    this.sound.style.display = 'none';
-    document.body.appendChild(this.sound);
-  }
-
-  play = () => this.sound.play()
-}
-
-const mayoBuzz = new Sound('mayo.ogg')
-const ketchupBuzz = new Sound('ketchup.ogg')
-const socket = io()
 const active = document.querySelector('.js-active')
 const buzzList = document.querySelector('.js-buzzes')
 const clear = document.querySelector('.js-clear')
+const scoresContainer = document.querySelector('.scores')
+const reset = document.querySelector('.js-reset')
 
 socket.on('active', (numberActive) => {
   active.innerText = `${numberActive} joined`
@@ -53,4 +39,29 @@ document.addEventListener('keydown', function(e) {
   if (e.which == 32) {
     socket.emit('clear')
   }
+})
+
+teams.forEach((team) => {
+  const decScore = scoresContainer.querySelector(`.${team} .js-score-minus`)
+  const incScore = scoresContainer.querySelector(`.${team} .js-score-plus`)
+
+  decScore.addEventListener('click', () => {
+    socket.emit('decrease', team)
+  })
+
+  incScore.addEventListener('click', () => {
+    socket.emit('increase', team)
+  })
+})
+
+socket.on('scores', (scores) => {
+  teams.forEach((team) => {
+    const score = scoresContainer.querySelector(`.${team} .score`)
+
+    score.innerText = scores[team]
+  })
+})
+
+reset.addEventListener('click', () => {
+  socket.emit('reset')
 })

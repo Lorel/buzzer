@@ -21,10 +21,26 @@ html
 
     div.container
       h2.js-active=`${users.length} joined`
+
+      .row.scores
+        each score, team in scores
+          .col(class=team)
+            h2=team.toUpperCase()
+
+            .row
+              button.js-score-minus='-'
+              span.score=score
+              button.js-score-plus='+'
+
+      .row
+        button.js-reset='Clear scores'
+
       ol.js-buzzes
         each buzz in buzzes
           li=`${buzz.name} on Team ${buzz.team}`
+
       button.js-clear='Clear buzzes'
 
     script(src='/socket.io/socket.io.js')
+    script(src='/common.js')
     script(src='/host.js')
