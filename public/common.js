@@ -15,5 +15,17 @@ class Sound {
 
 const mayoBuzz = new Sound('mayo.ogg')
 const ketchupBuzz = new Sound('ketchup.ogg')
+
+const play = (sound) => {
+  switch (sound) {
+    case 'mayo':
+      mayoBuzz.play()
+      break
+    case 'ketchup':
+      ketchupBuzz.play()
+      break
+  }
+}
+
 const socket = io()
 const teams = ['mayo', 'ketchup']

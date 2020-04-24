@@ -30,31 +30,33 @@ app.use(express.static('public'))
 app.set('view engine', 'pug')
 
 // authentication middleware
-app.use((req, res, next) => {
-  const secureUrls = [
-    '/host',
-  ]
+if (process.env.BASIC_AUTH_USER && process.env.BASIC_AUTH_PWD) {
+  app.use((req, res, next) => {
+    const secureUrls = [
+      '/host',
+    ]
 
-  if (process.env.BASIC_AUTH_USER && process.env.BASIC_AUTH_PWD && secureUrls.indexOf(req.url) > -1) {
-    const auth = {login: process.env.BASIC_AUTH_USER, password: process.env.BASIC_AUTH_PWD}
+    if (secureUrls.includes(req.url)) {
+      const auth = {login: process.env.BASIC_AUTH_USER, password: process.env.BASIC_AUTH_PWD}
 
-    // parse login and password from headers
-    const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
-    const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
+      // parse login and password from headers
+      const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+      const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
 
-    // Verify login and password are set and correct
-    if (login && password && login === auth.login && password === auth.password) {
-      // Access granted...
-      return next()
+      // Verify login and password are set and correct
+      if (login && password && login === auth.login && password === auth.password) {
+        // Access granted...
+        return next()
+      } else {
+        // Access denied...
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication required.')
+      }
     } else {
-      // Access denied...
-      res.set('WWW-Authenticate', 'Basic realm="401"')
-      res.status(401).send('Authentication required.')
+      return next()
     }
-  } else {
-    return next()
-  }
-})
+  })
+}
 
 app.get('/', (req, res) => res.render('index', Object.assign({ title }, getData())))
 app.get('/host', (req, res) => res.render('host', Object.assign({ title }, getData())))
@@ -66,7 +68,14 @@ const join = (user) => {
 }
 
 const buzz = (user) => {
-  data.buzzes.add(`${user.name}-${user.team}`)
+  const buzz = `${user.name}-${user.team}`
+
+  if (data.buzzes.has(buzz)) {
+    // do not process existing buzz
+    return
+  }
+
+  data.buzzes.add(buzz)
   io.emit('buzzes', [...data.buzzes])
   console.log(`${user.name} buzzed in!`)
 
