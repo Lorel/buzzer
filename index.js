@@ -84,13 +84,13 @@ const clear = () => {
 }
 
 const increase = (team) => {
-  data.scores[team] = data.scores[team] + 1
+  data.scores[team] = Math.min(data.scores[team] + 1, 25)
   io.emit('scores', data.scores)
   console.log(`${team} score increased!`, data.scores)
 }
 
 const decrease = (team) => {
-  data.scores[team] = data.scores[team] - 1
+  data.scores[team] = Math.max(data.scores[team] - 1, 0)
   io.emit('scores', data.scores)
   console.log(`${team} score decreased!`, data.scores)
 }
