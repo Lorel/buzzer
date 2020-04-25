@@ -50,11 +50,11 @@ html
         div.view.js-joined.hidden
           button.js-buzzer.buzzer
 
-          p.js-joined-info=''
+          p.joined-info.js-joined-info=''
 
-          ol.js-buzzes
+          ul.buzzes.js-buzzes
             each buzz in buzzes
-              li=`${buzz.name} on Team ${buzz.team}`
+              li(class=`buzz ${buzz.team}`)=`${buzz.name}`
 
           button.js-edit.secondary='Change order'
 

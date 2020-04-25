@@ -38,9 +38,9 @@ html
         .row
           button.js-reset='Clear scores'
 
-        ol.js-buzzes
+        ul.buzzes.js-buzzes
           each buzz in buzzes
-            li=`${buzz.name} on Team ${buzz.team}`
+            li(class=`buzz ${buzz.team}`)=`${buzz.name}`
 
         button.js-clear='Clear buzzes'
 

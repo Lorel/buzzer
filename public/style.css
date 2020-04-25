@@ -180,6 +180,13 @@ button:focus {
   width: 90%;
 }
 
+.joined-info .ketchup {
+  color: #C80101;
+}
+.joined-info .mayo {
+  color: #EDD400;
+}
+
 .buzzer {
   height: 10em;
   font-size: 2em;
@@ -201,6 +208,28 @@ button:focus {
 
 .buzzer img {
   width: 100%;
+}
+
+.buzzes {
+  list-style: none;
+  padding: 0;
+}
+
+.buzz {
+  border-style: solid;
+  border-width: 5px;
+}
+
+.buzz.ketchup {
+  background-color: #C80101;
+  border-color: #860000;
+  color: #560000;
+}
+
+.buzz.mayo {
+  background-color: #EDD400;
+  border-color: #C48D00;
+  color: #996F01;
 }
 
 .secondary {
