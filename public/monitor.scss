@@ -1,13 +1,28 @@
 @for $score from 0 through 25 {
   svg[class="ketchup-#{$score}"] {
+    // hide mayo TV
     g[id="mayo-tv"] {
       display: none;
     }
 
-    @for $i from 1 through 25 {
+    // score
+    g[id^="Red-"] {
+      // hide all
+      display: none;
+    }
+    g[id="Red-#{($score - $score % 10) / 10}0"] {
+      // show ten
+      display: block;
+    }
+    g[id="Red-#{$score % 10}"] {
+      // show unity
+      display: block;
+    }
 
+    // menu
+    @for $i from 1 through 25 {
       @if $i <= $score {
-        g[id="#{$i}-Ghost"] {
+        path[id="#{$i}-Ghost"] {
           display: none;
         }
       } @else {
@@ -19,14 +34,29 @@
   }
 
   svg[class="mayo-#{$score}"] {
+    // hide ketchup TV
     g[id="ketchup-tv"] {
       display: none;
     }
 
-    @for $i from 1 through 25 {
+    // score
+    g[id^="Yellow-"] {
+      // hide all
+      display: none;
+    }
+    g[id="Yellow-#{($score - $score % 10) / 10}0"] {
+      // show ten
+      display: block;
+    }
+    g[id="Yellow-#{$score % 10}"] {
+      // show unity
+      display: block;
+    }
 
+    // menu
+    @for $i from 1 through 25 {
       @if $i <= $score {
-        g[id="#{$i}-Ghost"] {
+        path[id="#{$i}-Ghost"] {
           display: none;
         }
       } @else {
