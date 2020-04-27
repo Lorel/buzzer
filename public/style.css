@@ -249,12 +249,8 @@ button:focus {
 }
 
 .tv.small {
-  flex: 1;
-  min-width: 0%;
-}
-
-.tv.small {
   max-width: 170px;
+  min-width: 0%;
 }
 
 @media (min-width: 1080px) {
