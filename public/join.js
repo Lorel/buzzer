@@ -34,7 +34,9 @@ form.addEventListener('submit', (e) => {
 
   socket.emit('join', user)
   saveUserInfo()
-  joinedInfo.innerHTML = `<span class="${user.team}">${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}</span>`
+  const team = `${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}`
+  const bgLink = `<a href="/${user.team}-bg.jpg" target="_blank">get your BG</a>`
+  joinedInfo.innerHTML = `<span class="${user.team}">${team} (${bgLink})</span>`
   form.classList.add('hidden')
   joined.classList.remove('hidden')
   body.classList.add('buzzer-mode')

@@ -24,6 +24,10 @@ button {
   font-size: 1em;
 }
 
+a {
+  color: inherit;
+}
+
 p {
   margin: 2em 0;
 }
