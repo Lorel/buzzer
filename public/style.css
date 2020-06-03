@@ -24,6 +24,10 @@ button {
   font-size: 1em;
 }
 
+a {
+  color: inherit;
+}
+
 p {
   margin: 2em 0;
 }
@@ -48,13 +52,31 @@ li {
 }
 
 .container {
-  width: 100%;
+  flex: 1 0;
   max-width: 400px;
   padding: 1em;
-  margin: 0 auto;
+  width: 100%;
 }
-.view button:last-child {
-  margin-bottom: 0;
+
+@media (min-width: 1080px) {
+  .container {
+    min-width: 400px;
+  }
+}
+
+.row {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.col {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .radio-container {
@@ -84,19 +106,19 @@ li {
   height: 170px;
   justify-content: center;
 }
-.radio-container.mayo label {
-  background-image: url("/mayo.png");
-  margin-right: 5px;
-}
 .radio-container.ketchup label {
   background-image: url("/ketchup.png");
   margin-left: 5px;
 }
-.radio-container.mayo input:checked + label {
-  border-color: #EDD402;
+.radio-container.mayo label {
+  background-image: url("/mayo.png");
+  margin-right: 5px;
 }
 .radio-container.ketchup input:checked + label {
   border-color: #CC0100;
+}
+.radio-container.mayo input:checked + label {
+  border-color: #EDD402;
 }
 .radio-container input {
   display: none;
@@ -136,9 +158,9 @@ input[type="number"]:active {
 }
 
 button {
-  padding: 1.4em 1.4em;
+  padding: .7em 1.4em;
   font-size: 1.2em;
-  background-color: #161D99;
+  background-color: #3748E1;
   color: #fff;
   cursor: pointer;
   border: 0;
@@ -160,6 +182,13 @@ button:focus {
 .main-image {
   margin-top: 66px;
   width: 90%;
+}
+
+.joined-info .ketchup {
+  color: #C80101;
+}
+.joined-info .mayo {
+  color: #EDD400;
 }
 
 .buzzer {
@@ -185,6 +214,28 @@ button:focus {
   width: 100%;
 }
 
+.buzzes {
+  list-style: none;
+  padding: 0;
+}
+
+.buzz {
+  border-style: solid;
+  border-width: 5px;
+}
+
+.buzz.ketchup {
+  background-color: #C80101;
+  border-color: #860000;
+  color: #560000;
+}
+
+.buzz.mayo {
+  background-color: #EDD400;
+  border-color: #C48D00;
+  color: #996F01;
+}
+
 .secondary {
   background-color: #fff;
   color: rgb(16, 21, 78);
@@ -192,4 +243,33 @@ button:focus {
 
 .secondary:hover {
   background-color: rgb(44, 75, 255);
+}
+
+.scores button {
+  height: 2.5rem;
+  line-height: 0;
+  padding: 0;
+  width: 2.5rem;
+}
+
+.tv.small {
+  max-width: 170px;
+  min-width: 0%;
+}
+
+@media (min-width: 1080px) {
+  .tv.small {
+    display: none;
+  }
+}
+
+.tv.large {
+  display: none;
+  max-width: 30vw;
+}
+
+@media (min-width: 1080px) {
+  .tv.large {
+    display: block;
+  }
 }

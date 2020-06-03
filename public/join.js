@@ -1,21 +1,3 @@
-class Sound {
-  constructor(src) {
-    this.sound = document.createElement('audio');
-    this.sound.src = src;
-    this.sound.setAttribute('preload', 'auto');
-    this.sound.setAttribute('controls', 'none');
-    this.sound.style.display = 'none';
-    document.body.appendChild(this.sound);
-  }
-
-  play() {
-    this.sound.play()
-  }
-}
-
-const mayoBuzz = new Sound('mayo.ogg')
-const ketchupBuzz = new Sound('ketchup.ogg')
-const socket = io()
 const body = document.querySelector('.js-body')
 const form = document.querySelector('.js-join')
 const joined = document.querySelector('.js-joined')
@@ -23,6 +5,7 @@ const buzzer = document.querySelector('.js-buzzer')
 const joinedInfo = document.querySelector('.js-joined-info')
 const editInfo = document.querySelector('.js-edit')
 const buzzList = document.querySelector('.js-buzzes')
+const scoresContainer = document.querySelector('.scores')
 
 let user = {}
 
@@ -51,7 +34,9 @@ form.addEventListener('submit', (e) => {
 
   socket.emit('join', user)
   saveUserInfo()
-  joinedInfo.innerText = `${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}`
+  const team = `${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}`
+  const bgLink = `<a href="/${user.team}-bg.jpg" target="_blank">get your BG</a>`
+  joinedInfo.innerHTML = `<span class="${user.team}">${team} (${bgLink})</span>`
   form.classList.add('hidden')
   joined.classList.remove('hidden')
   body.classList.add('buzzer-mode')
@@ -79,25 +64,17 @@ document.addEventListener('keydown', function(e) {
 })
 
 socket.on('buzzes', (buzzes) => {
-  const noBuzz = buzzList.innerHTML.length == 0
-
   buzzList.innerHTML = buzzes
     .map(buzz => {
       const p = buzz.split('-')
       return { name: p[0], team: p[1] }
     })
-    .map(user => `<li>${user.name.toUpperCase()} on Team ${user.team.toUpperCase()}</li>`)
+    .map(user => `<li class="buzz ${user.team}">${user.name.toUpperCase()}</li>`)
     .join('')
 
-  if (noBuzz && buzzes.length == 1) {
-    switch (buzzes[0].split('-')[1]) {
-      case 'mayo':
-        mayoBuzz.play()
-        break
-      case 'ketchup':
-        ketchupBuzz.play()
-        break
-    }
+  if (buzzes.length == 1) {
+    // play sound only for first buzz
+    play(buzzes[0].split('-')[1])
   }
 })
 

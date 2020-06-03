@@ -21,34 +21,45 @@ html
     header
       img.logo(src='/burger-cuite-logo.png')
 
-    div.container
-      form.view.js-join
-        img(src='/burger-normal.png' class='main-image')
-        h2='Let’s cheesebuzz!'
+    .row
+      object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv large')
 
-        input(type='text' name='name' placeholder='Your name' required='required')
+      div.container
+        .row
+          object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv small')
+          object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv small')
 
-        .teams
-          .radio-container.mayo
-            input(type='radio' name='team' required='required' value='mayo' id='mayo')
-            label(for='mayo')
+        form.view.js-join
+          img(src='/burger-normal.png' class='main-image')
+          h3='Welcome to the cheesebuzz'
 
-          .radio-container.ketchup
-            input(type='radio' name='team' required='required' value='ketchup' id='ketchup')
-            label(for='ketchup')
+          input(type='text' name='name' placeholder='Your name' required='required')
 
-        button(type='submit')='Order!'
+          .teams
+            .radio-container.ketchup
+              input(type='radio' name='team' required='required' value='ketchup' id='ketchup')
+              label(for='ketchup')
 
-      div.view.js-joined.hidden
-        button.js-buzzer.buzzer
+            .radio-container.mayo
+              input(type='radio' name='team' required='required' value='mayo' id='mayo')
+              label(for='mayo')
 
-        p.js-joined-info=''
 
-        ol.js-buzzes
-          each buzz in buzzes
-            li=`${buzz.name} on Team ${buzz.team}`
+          button(type='submit')='Place your order!'
 
-        button.js-edit.secondary='Change order'
+        div.view.js-joined.hidden
+          button.js-buzzer.buzzer
+
+          p.joined-info.js-joined-info=''
+
+          ul.buzzes.js-buzzes
+            each buzz in buzzes
+              li(class=`buzz ${buzz.team}`)=`${buzz.name}`
+
+          button.js-edit.secondary='Change order'
+
+      object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv large')
 
     script(src='/socket.io/socket.io.js')
+    script(src='/common.js')
     script(src='/join.js')

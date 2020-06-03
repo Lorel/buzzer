@@ -19,12 +19,33 @@ html
     header
       img.logo(src='/burger-cuite-logo.png')
 
-    div.container
-      h2.js-active=`${users.length} joined`
-      ol.js-buzzes
-        each buzz in buzzes
-          li=`${buzz.name} on Team ${buzz.team}`
-      button.js-clear='Clear buzzes'
+    .row
+      object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv large')
+
+      div.container
+        .row
+          object(type="image/svg+xml" data=`/monitor.svg?team=ketchup&score=${scores.ketchup}` class='tv small')
+          object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv small')
+
+        h2.js-active=`${users.length} joined`
+
+        .row.scores
+          each team in ['ketchup', 'mayo']
+            .row(class=team)
+              button.js-score-minus='-'
+              button.js-score-plus='+'
+
+        .row
+          button.js-reset='Clear scores'
+
+        ul.buzzes.js-buzzes
+          each buzz in buzzes
+            li(class=`buzz ${buzz.team}`)=`${buzz.name}`
+
+        button.js-clear='Clear buzzes'
+
+      object(type="image/svg+xml" data=`/monitor.svg?team=mayo&score=${scores.mayo}` class='tv large')
 
     script(src='/socket.io/socket.io.js')
+    script(src='/common.js')
     script(src='/host.js')
